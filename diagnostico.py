@@ -8,7 +8,7 @@ municipio = st.selectbox('Selecione o município', options=sorted(dados[dados['R
 tipo_forma_abastecimento = st.selectbox('Selecione o tipo da forma de abastecimento', options=sorted(dados[dados['Município']==municipio]['Tipo da Forma de Abastecimento'].unique()), index=None, placeholder='Selecione um tipo de forma de abastecimento')
 dados_municipio = dados[(dados['Município']==municipio)&(dados['Tipo da Forma de Abastecimento']==tipo_forma_abastecimento)]
 try:
-  st.dataframe(dados_municipio)
+  st.data_editor(dados_municipio)
   st.radio('Qual o status da forma de abastecimento?', ['Sem informação', 'Funcionando', 'Parada'], horizontal = True)
 
 except:
