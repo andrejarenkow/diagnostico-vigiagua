@@ -19,19 +19,20 @@ def reset():
     #     )
     for key in st.session_state.keys():
         # Itera sobre as chaves do estado da sessão e redefine seus valores para None
-        st.session_state[key] = None 
+        st.session_state[key] = None
+        
 conn = st.experimental_connection("gsheets", type=GSheetsConnection)
 # Lê os dados de um arquivo Excel online
 @st.cache_data
-def load_data(url):
-    df = conn.read('Página1')
+def load_data(worksheet):
+    df = conn.read(worksheet)
     return df    
-dados = load_data('https://docs.google.com/spreadsheets/d/e/2PACX-1vTnQORvrZiO6l26dKcj9alqq76X1sP7IdLjfSwu-FVhj2b3pM8PvjPGVEHcDt6nhhIkFXy-utm9FIQ9/pub?output=xlsx')
+dados = load_data('Página1')
 
-CODIGO_PLANILHA = '1V6v6pqt21cR3yHkkraQJMYdutJg2PAM1T8nKpRxd-VE'
-gc = gspread.service_account(filename='key.json')
-sh = gc.open_by_key(CODIGO_PLANILHA)
-ws = sh.worksheet('Página1')
+#CODIGO_PLANILHA = '1V6v6pqt21cR3yHkkraQJMYdutJg2PAM1T8nKpRxd-VE'
+#gc = gspread.service_account(filename='key.json')
+#sh = gc.open_by_key(CODIGO_PLANILHA)
+#ws = sh.worksheet('Página1')
 
 col1,colcenter2,col3 = st.columns(3)
 # Cria um seletor para escolher a Regional de Saúde
