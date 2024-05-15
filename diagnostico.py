@@ -20,11 +20,11 @@ def reset():
     for key in st.session_state.keys():
         # Itera sobre as chaves do estado da sessão e redefine seus valores para None
         st.session_state[key] = None 
-
+conn = st.experimental_connection("gsheets", type=GSheetsConnection)
 # Lê os dados de um arquivo Excel online
 @st.cache_data
 def load_data(url):
-    df = pd.read_excel(url)
+    df = conn.read(url)
     return df    
 dados = load_data('https://docs.google.com/spreadsheets/d/e/2PACX-1vTnQORvrZiO6l26dKcj9alqq76X1sP7IdLjfSwu-FVhj2b3pM8PvjPGVEHcDt6nhhIkFXy-utm9FIQ9/pub?output=xlsx')
 
