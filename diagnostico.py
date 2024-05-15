@@ -20,14 +20,14 @@ def reset():
         # Itera sobre as chaves do estado da sessão e redefine seus valores para None
         st.session_state[key] = None
         
-conn = st.experimental_connection("gsheets", type=GSheetsConnection)
-print(conn)
-# Lê os dados de um arquivo Excel online
 
-def load_data(worksheet):
-    df = conn.read(worksheet)
-    return df    
-dados = load_data('Página1')
+try:
+    conn = st.experimental_connection("gsheets", type=GSheetsConnection)
+    print(conn)
+    # Lê os dados de um arquivo Excel online
+    dados = conn.read('Página1')
+except Exception as e:
+    print(e)
 
 #CODIGO_PLANILHA = '1V6v6pqt21cR3yHkkraQJMYdutJg2PAM1T8nKpRxd-VE'
 #gc = gspread.service_account(filename='key.json')
