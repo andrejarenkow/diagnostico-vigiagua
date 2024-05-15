@@ -20,6 +20,7 @@ def reset():
         st.session_state[key] = None 
 
 # Lê os dados de um arquivo Excel online
+@st.cache_data
 def load_data(url):
     df = pd.read_excel(url)
     return df
