@@ -21,6 +21,7 @@ def reset():
         st.session_state[key] = None
         
 conn = st.experimental_connection("gsheets", type=GSheetsConnection)
+print(conn)
 # Lê os dados de um arquivo Excel online
 
 def load_data(worksheet):
