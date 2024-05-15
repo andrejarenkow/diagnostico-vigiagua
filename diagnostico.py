@@ -21,16 +21,12 @@ def reset():
         st.session_state[key] = None
         
 with st.container():
-    coluna_inicial1,coluna_inicial2,coluna_inicial3 = st.columns([1,6,1])
-    with coluna_inicial1:
-        st.image("logo_estado.png", width=250)
+    coluna_inicial1,coluna_inicial2,coluna_inicial3 = st.columns([1,8,1])
 
     with coluna_inicial2:
         st.markdown(f'<h1 style="text-align: center;color:#000000;font-size:42px;">{"FORMULÁRIO VIGIAGUA - VIGIDESASTRES"}</h1>', unsafe_allow_html=True)    
         st.markdown(f'<h1 style="text-align: center;color:#000000;font-size:24px;">{"CRS/CEVS/Secretaria de Saúde do Estado do Rio Grande do Sul"}</h1>', unsafe_allow_html=True)
 
-    with coluna_inicial3:
-        st.image('CEVS.png', width=200)
 conn = st.experimental_connection("gsheets", type=GSheetsConnection)
 # Lê os dados de um arquivo Excel online
 dados = conn.read(spreadsheet="https://docs.google.com/spreadsheets/d/1V6v6pqt21cR3yHkkraQJMYdutJg2PAM1T8nKpRxd-VE/edit?usp=sharing")
