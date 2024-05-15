@@ -1,5 +1,6 @@
 import pandas as pd  # Importa a biblioteca pandas e a renomeia como pd
-import streamlit as st  # Importa a biblioteca streamlit e a renomeia como st
+import streamlit as st
+import gspread# Importa a biblioteca streamlit e a renomeia como st
 
 pd.options.display.max_columns=None
 st.set_page_config(
@@ -23,9 +24,14 @@ def reset():
 @st.cache_data
 def load_data(url):
     df = pd.read_excel(url)
-    return df
-
+    return df    
 dados = load_data('https://docs.google.com/spreadsheets/d/e/2PACX-1vTnQORvrZiO6l26dKcj9alqq76X1sP7IdLjfSwu-FVhj2b3pM8PvjPGVEHcDt6nhhIkFXy-utm9FIQ9/pub?output=xlsx')
+
+CODIGO_PLANILHA = '1V6v6pqt21cR3yHkkraQJMYdutJg2PAM1T8nKpRxd-VE'
+gc = gspread.service_account(filename='key.json')
+sh = gc.open_by_key(CODIGO_PLANILHA)
+ws = sh.worksheet('Página1')
+
 col1,colcenter2,col3 = st.columns(3)
 # Cria um seletor para escolher a Regional de Saúde
 with colcenter2:
