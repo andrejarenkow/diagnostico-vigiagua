@@ -1,6 +1,13 @@
 import pandas as pd  # Importa a biblioteca pandas e a renomeia como pd
 import streamlit as st  # Importa a biblioteca streamlit e a renomeia como st
 
+pd.options.display.max_columns=None
+st.set_page_config(
+    page_title="Form",
+    page_icon="🌍",
+    layout="wide",
+    initial_sidebar_state='collapsed')
+
 def reset():
     # Função para redefinir o estado da sessão
     # Comentários abaixo são comentários de código, não estão habilitados no momento devido ao formato da entrada.
