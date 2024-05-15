@@ -13,11 +13,11 @@ def reset():
         st.session_state[key] = None 
 
 # Lê os dados de um arquivo Excel online
-def load_data():
-    df = pd.read_excel('https://docs.google.com/spreadsheets/d/e/2PACX-1vTnQORvrZiO6l26dKcj9alqq76X1sP7IdLjfSwu-FVhj2b3pM8PvjPGVEHcDt6nhhIkFXy-utm9FIQ9/pub?output=xlsx')
+def load_data(url):
+    df = pd.read_excel(url)
     return df
 
-dados = load_data()
+dados = load_data('https://docs.google.com/spreadsheets/d/e/2PACX-1vTnQORvrZiO6l26dKcj9alqq76X1sP7IdLjfSwu-FVhj2b3pM8PvjPGVEHcDt6nhhIkFXy-utm9FIQ9/pub?output=xlsx')
 
 # Cria um seletor para escolher a Regional de Saúde
 crs = st.selectbox('Selecione a CRS', options=dados['Regional de Saúde'].unique(), index=None, placeholder='Selecione uma CRS', key='crs')
