@@ -24,7 +24,7 @@ conn = st.experimental_connection("gsheets", type=GSheetsConnection)
 # Lê os dados de um arquivo Excel online
 @st.cache_data
 def load_data(url):
-    df = conn.read(url)
+    df = conn.read('Página1')
     return df    
 dados = load_data('https://docs.google.com/spreadsheets/d/e/2PACX-1vTnQORvrZiO6l26dKcj9alqq76X1sP7IdLjfSwu-FVhj2b3pM8PvjPGVEHcDt6nhhIkFXy-utm9FIQ9/pub?output=xlsx')
 
