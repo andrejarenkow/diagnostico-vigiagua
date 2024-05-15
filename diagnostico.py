@@ -23,11 +23,11 @@ def reset():
 
 try:
     conn = st.experimental_connection("gsheets", type=GSheetsConnection)
-    print(conn)
+    st.write(conn)
     # Lê os dados de um arquivo Excel online
     dados = conn.read('Página1')
 except Exception as e:
-    print(e)
+    st.write(e)
 
 #CODIGO_PLANILHA = '1V6v6pqt21cR3yHkkraQJMYdutJg2PAM1T8nKpRxd-VE'
 #gc = gspread.service_account(filename='key.json')
