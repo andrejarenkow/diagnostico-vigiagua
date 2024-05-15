@@ -1,6 +1,6 @@
 import pandas as pd  # Importa a biblioteca pandas e a renomeia como pd
-import streamlit as st
-import gspread# Importa a biblioteca streamlit e a renomeia como st
+import streamlit as st # Importa a biblioteca streamlit e a renomeia como st
+import gspread
 
 pd.options.display.max_columns=None
 st.set_page_config(
