@@ -11,7 +11,12 @@ try:
   st.subheader(f'{tipo_forma_abastecimento} no município de {municipio}')
   st.data_editor(dados_municipio, use_container_width =True, hide_index=True)
   st.write('Marque o status de cada uma para informar seu status')
-  st.radio('Qual o status da forma de abastecimento?', ['Sem informação', 'Funcionando', 'Parada'], horizontal = True)
+  submit = st.button('Enviar atualização!', type='primary')
+
+if submit:
+        st.success('Solicitação enviada!', icon="✅")
+        st.cache_data.clear()
+
 
 except:
   st.write('')
