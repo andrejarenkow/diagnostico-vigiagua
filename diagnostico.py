@@ -22,7 +22,7 @@ def reset():
         
 conn = st.experimental_connection("gsheets", type=GSheetsConnection)
 # Lê os dados de um arquivo Excel online
-@st.cache_data
+
 def load_data(worksheet):
     df = conn.read(worksheet)
     return df    
