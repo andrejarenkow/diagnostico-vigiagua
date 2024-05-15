@@ -38,7 +38,7 @@ with colcenter2:
 
 # Filtra os dados para exibir apenas as informações relevantes com base no município e tipo da forma de abastecimento selecionados
 dados_municipio = dados[(dados['Município']==municipio)&(dados['Tipo da Forma de Abastecimento']==tipo_forma_abastecimento)][['Nome da Forma de Abastecimento','Sem informação', 'Funcionando', 'Parada/danificada']]
-col4,colcenter5,col6 = st.columns([1,2,1)
+col4,colcenter5,col6 = st.columns([1,2,1])
 try:
     # Tenta executar as seguintes instruções
     # Comentários abaixo são comentários de código, não estão habilitados no momento devido ao formato da entrada.
