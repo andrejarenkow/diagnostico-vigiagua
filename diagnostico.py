@@ -9,6 +9,7 @@ tipo_forma_abastecimento = st.selectbox('Selecione o tipo da forma de abastecime
 dados_municipio = dados[(dados['Município']==municipio)&(dados['Tipo da Forma de Abastecimento']==tipo_forma_abastecimento)]
 try:
   st.dataframe(dados_municipio)
+  st.radio('Qual o status da forma de abastecimento?', ['Sem informação', 'Funcionando', 'Parada'])
 
 except:
   st.write('')
