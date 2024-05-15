@@ -25,7 +25,7 @@ try:
     conn = st.experimental_connection("gsheets", type=GSheetsConnection)
     st.write(conn)
     # Lê os dados de um arquivo Excel online
-    dados = conn.read(spreadsheet='', use_cols=[0,16])
+    dados = conn.read(spreadsheet="https://docs.google.com/spreadsheets/d/1V6v6pqt21cR3yHkkraQJMYdutJg2PAM1T8nKpRxd-VE/edit?usp=sharing", use_cols=[0,16])
 except Exception as e:
     st.write(e)
 
