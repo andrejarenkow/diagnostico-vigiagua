@@ -16,9 +16,10 @@ municipio = st.selectbox('Selecione o município', options=sorted(dados[dados['R
 tipo_forma_abastecimento = st.selectbox('Selecione o tipo da forma de abastecimento', options=sorted(dados[dados['Município']==municipio]['Tipo da Forma de Abastecimento'].unique()), index=None, placeholder='Selecione um tipo de forma de abastecimento', key='forma')
 dados_municipio = dados[(dados['Município']==municipio)&(dados['Tipo da Forma de Abastecimento']==tipo_forma_abastecimento)][['Nome da Forma de Abastecimento','Sem informação',	'Funcionando', 'Parada/danificada']]
 try:
-  st.subheader(f'{tipo_forma_abastecimento} no município de {municipio}')
-  st.data_editor(dados_municipio, use_container_width =True, hide_index=True)
+  #st.subheader(f'{tipo_forma_abastecimento} no município de {municipio}')
   st.write('Marque o status de cada uma para informar seu status')
+  st.data_editor(dados_municipio, use_container_width =True, hide_index=True)
+  
   submit = st.button('Enviar atualização!', type='primary', on_click=reset)
 
 
