@@ -13,9 +13,9 @@ try:
   st.write('Marque o status de cada uma para informar seu status')
   submit = st.button('Enviar atualização!', type='primary')
 
-if submit:
-        st.success('Solicitação enviada!', icon="✅")
-        st.cache_data.clear()
+  if submit:
+          st.success('Solicitação enviada!', icon="✅")
+          st.cache_data.clear()
 
 
 except:
