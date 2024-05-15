@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 
-  def reset():
+def reset():
 #    conn.update(
 #            worksheet="dados_form",
 #            data=df,
