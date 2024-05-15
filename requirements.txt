@@ -4,3 +4,6 @@ plotly
 st-gsheets-connection
 requests
 openpyxl
+google-api-python-client 
+google-auth-httplib2 
+google-auth-oauthlib
