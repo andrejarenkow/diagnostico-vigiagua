@@ -6,10 +6,11 @@ dados = pd.read_excel('https://docs.google.com/spreadsheets/d/e/2PACX-1vTnQORvrZ
 crs = st.selectbox('Selecione a CRS', options=dados['Regional de Saúde'].unique(), index=None, placeholder='Selecione uma CRS')
 municipio = st.selectbox('Selecione o município', options=sorted(dados[dados['Regional de Saúde']==crs]['Município'].unique()), index=None, placeholder='Selecione uma município')
 tipo_forma_abastecimento = st.selectbox('Selecione o tipo da forma de abastecimento', options=sorted(dados[dados['Município']==municipio]['Tipo da Forma de Abastecimento'].unique()), index=None, placeholder='Selecione um tipo de forma de abastecimento')
-dados_municipio = dados[(dados['Município']==municipio)&(dados['Tipo da Forma de Abastecimento']==tipo_forma_abastecimento)][['Nome da Forma de Abastecimento', 'Tipo da Forma de Abastecimento', 'Sem informação',	'Funcionando', 'Parada/danificada']]
+dados_municipio = dados[(dados['Município']==municipio)&(dados['Tipo da Forma de Abastecimento']==tipo_forma_abastecimento)][['Nome da Forma de Abastecimento','Sem informação',	'Funcionando', 'Parada/danificada']]
 try:
-  
-  st.data_editor(dados_municipio)
+  st.subheader(f'{tipo_forma_abastecimento} no município de {municipio}')
+  st.data_editor(dados_municipio, use_container_width =True)
+  st.write('Marque o status de cada uma para informar seu status')
   st.radio('Qual o status da forma de abastecimento?', ['Sem informação', 'Funcionando', 'Parada'], horizontal = True)
 
 except:
