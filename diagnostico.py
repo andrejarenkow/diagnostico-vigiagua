@@ -127,7 +127,7 @@ with container_Sbox:
 
         # Filtra os dados para exibir apenas as informações relevantes com base no município e tipo da forma de abastecimento selecionados
         dados_municipio = dados[(dados['Município']==municipio)&(dados['Tipo da Forma de Abastecimento']==tipo_forma_abastecimento)][['Nome da Forma de Abastecimento','Sem informação', 'Funcionando', 'Parada/danificada']]
-
+        
 container_data_editor = st.container()
 with container_data_editor:
     col4,colcenter5,col6 = st.columns([1,2,1])
@@ -136,7 +136,7 @@ with container_data_editor:
         # Comentários abaixo são comentários de código, não estão habilitados no momento devido ao formato da entrada.
         # st.subheader(f'{tipo_forma_abastecimento} no município de {municipio}')
         with colcenter5:
-            st.write('Marque o status de cada uma para informar seu status')  # Exibe uma mensagem para o usuário
+            st.markdown(f'<h1 style="text-align: center;color:#FFFFFF;font-size:16px;">{"Marque o status de cada uma para informar seu status"}</h1>', unsafe_allow_html=True)  # Exibe uma mensagem para o usuário
             st.data_editor(dados_municipio, use_container_width=True, hide_index=True)  # Exibe os dados do município para edição
         
             # Cria um botão para enviar a atualização e redefine o estado da sessão quando clicado
