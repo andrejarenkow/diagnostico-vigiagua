@@ -159,10 +159,7 @@ with container_data_editor:
                 lista_atualizacoes = []
                 mudancas = []
                 for index, row in dados.iterrows():
-                    matching_rows = dados[
-                        (edited_df['Nome da Forma de Abastecimento'] == row['Nome da Forma de Abastecimento']) &
-                        (municipio == row['Município'])
-                    ]
+                    matching_rows = edited_df[(edited_df['Nome da Forma de Abastecimento'] == row['Nome da Forma de Abastecimento']]
                     for _, match in matching_rows.iterrows():
                         # Armazenar dados antes da mudança
                         old_values = row[['Sem informação', 'Funcionando', 'Parada/danificada']].tolist()
