@@ -156,14 +156,12 @@ with container_data_editor:
             mudancas = pd.DataFrame(columns=['Nome da Forma de Abastecimento', 'Município', 'Antes', 'Depois'])
             # Verifica se o botão de envio foi clicado
             if submit:
-                dados_antigos = dados.copy()
                 dados.reset_index(drop=True, inplace=True)
                 edited_df.reset_index(drop=True, inplace=True)
                 dados.set_index('Município', 'Nome da Forma de Abastecimento', inplace=True)
                 edited_df.set_index('Município', 'Nome da Forma de Abastecimento', inplace=True)
                 dados.update(edited_df)
                 dados.reset_index(inplace=True)
-                dados_novos = dados.copy()
                 for idx in dados_novos.index:
                     if idx in dados.index and not dados.loc[idx].equals(dados_novos.loc[idx]):
                         mudancas = mudancas.append({
@@ -171,9 +169,9 @@ with container_data_editor:
                             'Município': idx[1],
                             'Antes': dados.loc[idx].to_dict(),
                             'Depois': edited_df.loc[idx].to_dict()}, ignore_index=True)
-                
+                data_to_send = [dados.columns.tolist()] + dados.values.tolist()
                 # Atualizar a planilha
-                conn.update(worksheet='Tabela1', data=dados_novos)
+                conn.update(worksheet='Tabela1', data=data_to_send)
                     
                 # Exibe uma mensagem de sucesso quando a atualização é enviada
                 st.success(f'Atualização enviada! {len(lista_atualizacoes)} linhas foram atualizadas.")!', icon="✅")
