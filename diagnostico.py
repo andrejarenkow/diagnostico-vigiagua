@@ -101,7 +101,21 @@ with container_Sbox:
         st.markdown(
             f"""
             <style>
+            #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-1jicfl2.ea3mdgi5 > div > div > div > div.st-emotion-cache-ocqkz7.e1f1d6gn5 > div:nth-child(2) > div > div > div > div:nth-child(1) > div > label {{
+                text-align: center;
+                margin: 0 auto; /* Centraliza horizontalmente */
+                display: table;
+            }}
+            </style>
+            <style>
             #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-1jicfl2.ea3mdgi5 > div > div > div > div.st-emotion-cache-ocqkz7.e1f1d6gn5 > div:nth-child(2) > div > div > div > div:nth-child(2) > div > label {{
+                text-align: center;
+                margin: 0 auto; /* Centraliza horizontalmente */
+                display: table;
+            }}
+            </style>
+            <style>
+            #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-1jicfl2.ea3mdgi5 > div > div > div > div.st-emotion-cache-ocqkz7.e1f1d6gn5 > div:nth-child(2) > div > div > div > div:nth-child(3) > div > label {{
                 text-align: center;
                 margin: 0 auto; /* Centraliza horizontalmente */
                 display: table;
