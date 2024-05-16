@@ -156,10 +156,12 @@ with container_data_editor:
             mudancas = pd.DataFrame(columns=['Nome da Forma de Abastecimento', 'Município', 'Antes', 'Depois'])
             # Verifica se o botão de envio foi clicado
             if submit:
-                dados.set_index('Nome da Forma de Abastecimento', inplace=True)
-                edited_df.set_index('Nome da Forma de Abastecimento', inplace=True)
-                dados_novos = dados.update(edited_df)
-
+                dados_antigos = dados.copy()
+                dados.set_index('Município', 'Nome da Forma de Abastecimento', inplace=True)
+                edited_df.set_index('Município', 'Nome da Forma de Abastecimento', inplace=True)
+                dados.update(edited_df)
+                dados.reset_index(inplace=True)
+                dados_novos = dados.copy()
                 for idx in dados_novos.index:
                     if idx in dados.index and not dados.loc[idx].equals(dados_novos.loc[idx]):
                         mudancas = mudancas.append({
