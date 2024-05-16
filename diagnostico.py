@@ -183,7 +183,7 @@ with container_data_editor:
                 st.cache_data.clear()  # Limpa o cache de dados
                 st.markdown(f'<h1 style="text-align: center;color:#FFFFFF;font-size:16px;">{"As linhas modificadas na tabela foram:"}</h1>', unsafe_allow_html=True)
                 # Exibe uma mensagem para o usuário
-                st.datafram(df_mudancas)
+                st.dataframe(df_mudancas)
     except:
         # Se ocorrer uma exceção, exibe uma mensagem em branco
         st.write('')
