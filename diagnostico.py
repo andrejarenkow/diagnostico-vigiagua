@@ -157,6 +157,8 @@ with container_data_editor:
             # Verifica se o botão de envio foi clicado
             if submit:
                 dados_antigos = dados.copy()
+                dados.reset_index(drop=True, inplace=True)
+                edited_df.reset_index(drop=True, inplace=True)
                 dados.set_index('Município', 'Nome da Forma de Abastecimento', inplace=True)
                 edited_df.set_index('Município', 'Nome da Forma de Abastecimento', inplace=True)
                 dados.update(edited_df)
