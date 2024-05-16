@@ -30,7 +30,7 @@ with container_titulo:
 
 conn = st.experimental_connection("gsheets", type=GSheetsConnection)
 # Lê os dados de um arquivo Excel online
-dados = conn.read(spreadsheet="https://docs.google.com/spreadsheets/d/1V6v6pqt21cR3yHkkraQJMYdutJg2PAM1T8nKpRxd-VE/edit?usp=sharing")
+dados = conn.read()
 
 #ws = conn.get_worksheet('Tabela1')
 
