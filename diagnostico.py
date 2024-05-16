@@ -67,7 +67,16 @@ with container_Sbox:
             f"""
             <style>
             #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-1jicfl2.ea3mdgi5 > div > div > div > div.st-emotion-cache-ocqkz7.e1f1d6gn5 > div:nth-child(2) > div > div > div > div:nth-child(1) > div > div {{
-                background-color: #e0ffe0; /* Verde bem clarinho */
+                background-color: #FFFFFF; /* Verde bem clarinho */
+                border: 1px solid white; /* Borda verde */
+                border-radius: 8px;
+                padding: 0px;
+                max-width: calc(100% - 25px);
+            }}
+            </style>
+            <style>
+            #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-1jicfl2.ea3mdgi5 > div > div > div > div.st-emotion-cache-ocqkz7.e1f1d6gn5 > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div {{
+                background-color: #FFFFFF; /* Verde bem clarinho */
                 border: 1px solid white; /* Borda verde */
                 border-radius: 8px;
                 padding: 0px;
