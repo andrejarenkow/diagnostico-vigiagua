@@ -41,13 +41,13 @@ col1,colcenter2,col3 = st.columns(3)
 # Cria um seletor para escolher a Regional de Saúde
 with container_Sbox:
     with colcenter2:
-        crs = st.selectbox('Selecione a CRS', options=dados['Regional de Saúde'].unique(), index=None, placeholder='Selecione uma CRS', key='crs')
+        crs = st.selectbox('COORDENADORIA REGIONAL DE SAÚDE', options=dados['Regional de Saúde'].unique(), index=None, placeholder='Selecione uma CRS', key='crs')
         
         # Cria um seletor para escolher o município com base na Regional de Saúde selecionada
-        municipio = st.selectbox('Selecione o município', options=sorted(dados[dados['Regional de Saúde']==crs]['Município'].unique()), index=None, placeholder='Selecione uma município', key='municipio')
+        municipio = st.selectbox('MUNICÍPIO', options=sorted(dados[dados['Regional de Saúde']==crs]['Município'].unique()), index=None, placeholder='Selecione uma município', key='municipio')
         
         # Cria um seletor para escolher o tipo da forma de abastecimento com base no município selecionado
-        tipo_forma_abastecimento = st.selectbox('Selecione o tipo da forma de abastecimento', options=sorted(dados[dados['Município']==municipio]['Tipo da Forma de Abastecimento'].unique()), index=None, placeholder='Selecione um tipo de forma de abastecimento', key='forma')
+        tipo_forma_abastecimento = st.selectbox('TIPO DA FORMA DE ABASTECIMNENTO', options=sorted(dados[dados['Município']==municipio]['Tipo da Forma de Abastecimento'].unique()), index=None, placeholder='Selecione um tipo de forma de abastecimento', key='forma')
 
         st.markdown(
             f"""
