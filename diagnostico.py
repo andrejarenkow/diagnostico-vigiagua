@@ -32,6 +32,8 @@ conn = st.experimental_connection("gsheets", type=GSheetsConnection)
 # Lê os dados de um arquivo Excel online
 dados = conn.read(spreadsheet="https://docs.google.com/spreadsheets/d/1V6v6pqt21cR3yHkkraQJMYdutJg2PAM1T8nKpRxd-VE/edit?usp=sharing")
 
+ws = conn.get_worksheet('diagnostico vigiagua google', 'Tabela1')
+
 #CODIGO_PLANILHA = '1V6v6pqt21cR3yHkkraQJMYdutJg2PAM1T8nKpRxd-VE'
 #gc = gspread.service_account(filename='key.json')
 #sh = gc.open_by_key(CODIGO_PLANILHA)
@@ -151,43 +153,50 @@ with container_data_editor:
             }}
             </style>
             ''', unsafe_allow_html=True)
-
-            sql = '''
-                    UPDATE tabela1
-                    SET [Sem informação] = ?, Funcionando = ?, [Parada/danificada] = ?
-                    WHERE `[Nome da Forma de abastecimento]` = ?;        
-                   '''
             
             # Verifica se o botão de envio foi clicado
             if submit:
-                try:
-                    lista_mudancas  = []
-                    for index, row in dados[edited_df.columns].iterrows():
-                        for index2, row2 in edited_df.iterrows():
-                            if dados['Nome da Forma de Abastecimento'][index] == edited_df['Nome da Forma de Abastecimneto'][index2] and dados['Município'][index] == municipio:
-                                
-                                st.write('Entrei no if')
-                                conn.query(sql, (edited_df['Sem informação'][index2], edited_df['Funcionando'][index2], edited_df['Parada/danificada'][index2], edited_df['Nome da Forma de Abastecimento'][index2]))
-                                lista_mudancas.append(dados.iloc[[index]])
-                                
-                    #conn.commit()
-                except Exception as x1_error:
-                    st.write(x1_error)
+                lista_atualizacoes = []
+                mudancas = []
+                for index, row in dados.iterrows():
+                    matching_rows = edited_df[
+                        (edited_df['Nome da Forma de Abastecimento'] == row['Nome da Forma de Abastecimento']) &
+                        (edited_df['Município'] == row['Município'])
+                    ]
+                    for _, match in matching_rows.iterrows():
+                        # Armazenar dados antes da mudança
+                        old_values = row[['Sem informação', 'Funcionando', 'Parada/danificada']].tolist()
+                        new_values = [match['Sem informação'], match['Funcionando'], match['Parada/danificada']]
+                        
+                        # Verificar se realmente há uma mudança
+                        if old_values != new_values:
+                            lista_atualizacoes.append({
+                                'range': f'A{index+2}:D{index+2}',
+                                'values': [new_values]
+                            })
+                            mudancas.append({
+                                'Index': index,
+                                'Antes': old_values,
+                                'Depois': new_values
+                            })
+                
+                # Atualizar a planilha
+                for update in lista_atualizacoes:
+                    conn.update(worksheet=ws, range=update['range'], values=update['values'])
                 try:
                     st.markdown(f'<h1 style="text-align: center;color:#FFFFFF;font-size:16px;">{"As linhas modificadas na tabela foram:"}</h1>', unsafe_allow_html=True)
-                    df_mudancas = pd.DataFrame(data = lista_mudancas, columns=edited_df.columns)
-                    df_mudancas = df_mudancas.set_index('Nome da Forma de Abastecimento')
+                    df_mudancas = pd.DataFrame(mudancas)
                 except Exception as x_error:
                     st.write(x_error)
                 #conn.update(data=dados)
                     
                 # Exibe uma mensagem de sucesso quando a atualização é enviada
-                st.success('Atualização enviada!', icon="✅")
+                st.success(f'st.success(f"Atualização enviada! {len(lista_atualizacoes)} linhas foram atualizadas.")!', icon="✅")
                 st.dataframe(df_mudancas)
                 st.cache_data.clear()  # Limpa o cache de dados
                 
                 # Exibe uma mensagem para o usuário
                 
-    except:
+    except Exception as erro_ultimo:
         # Se ocorrer uma exceção, exibe uma mensagem em branco
-        st.write('')
+        st.write(erro_ultimo)
