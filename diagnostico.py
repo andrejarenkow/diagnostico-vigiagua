@@ -49,6 +49,47 @@ with container_Sbox:
         # Cria um seletor para escolher o tipo da forma de abastecimento com base no município selecionado
         tipo_forma_abastecimento = st.selectbox('Selecione o tipo da forma de abastecimento', options=sorted(dados[dados['Município']==municipio]['Tipo da Forma de Abastecimento'].unique()), index=None, placeholder='Selecione um tipo de forma de abastecimento', key='forma')
 
+        st.markdown(
+            f"""
+            <style>
+            #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-1jicfl2.ea3mdgi5 > div > div > div > div.st-emotion-cache-ocqkz7.e1f1d6gn5 > div:nth-child(2) {{
+                box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.25);
+                border: 2px solid green;
+                border-radius: 15px;
+                padding: 10px;
+            }}
+            </style>
+            """,
+            unsafe_allow_html=True
+            
+        )        
+        st.markdown(
+            f"""
+            <style>
+            #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-1jicfl2.ea3mdgi5 > div > div > div > div.st-emotion-cache-ocqkz7.e1f1d6gn5 > div:nth-child(2) > div > div > div > div:nth-child(1) > div > div {{
+                background-color: #e0ffe0; /* Verde bem clarinho */
+                border: 1px solid lightgreen; /* Borda verde */
+                border-radius: 8px;
+                padding: 0px;
+                max-width: calc(100% - 25px);
+            }}
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+        st.markdown(
+            f"""
+            <style>
+            #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-1jicfl2.ea3mdgi5 > div > div > div > div.st-emotion-cache-ocqkz7.e1f1d6gn5 > div:nth-child(2) > div > div > div > div:nth-child(2) > div > label > div > p {{
+                text-align: center;
+                margin: 0 auto; /* Centraliza horizontalmente */
+                display: table;
+            }}
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+
         # Filtra os dados para exibir apenas as informações relevantes com base no município e tipo da forma de abastecimento selecionados
         dados_municipio = dados[(dados['Município']==municipio)&(dados['Tipo da Forma de Abastecimento']==tipo_forma_abastecimento)][['Nome da Forma de Abastecimento','Sem informação', 'Funcionando', 'Parada/danificada']]
 
