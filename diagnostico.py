@@ -128,7 +128,7 @@ with container_Sbox:
         )
 
         # Filtra os dados para exibir apenas as informações relevantes com base no município e tipo da forma de abastecimento selecionados
-        dados_municipio = dados[(dados['Município']==municipio)&(dados['Tipo da Forma de Abastecimento']==tipo_forma_abastecimento)][['Município','Nome da Forma de Abastecimento','Sem informação', 'Funcionando', 'Parada/danificada']]
+        dados_municipio = dados[(dados['Município']==municipio)&(dados['Tipo da Forma de Abastecimento']==tipo_forma_abastecimento)][['Município','Código Forma de abastecimento','Nome da Forma de Abastecimento','Sem informação', 'Funcionando', 'Parada/danificada']]
         
 container_data_editor = st.container()
 with container_data_editor:
@@ -139,7 +139,7 @@ with container_data_editor:
         # st.subheader(f'{tipo_forma_abastecimento} no município de {municipio}')
         with colcenter5:
             st.markdown(f'<h1 style="text-align: center;color:#FFFFFF;font-size:16px;">{"Marque o status de cada uma para informar seu status"}</h1>', unsafe_allow_html=True)  # Exibe uma mensagem para o usuário
-            edited_df = st.data_editor(dados_municipio, use_container_width=True, hide_index=True)  # Exibe os dados do município para edição
+            edited_df = st.data_editor(dados_municipio[['Nome da Forma de Abastecimento','Sem informação', 'Funcionando', 'Parada/danificada']], use_container_width=True, hide_index=True)  # Exibe os dados do município para edição
             
             # Cria um botão para enviar a atualização e redefine o estado da sessão quando clicado           
             submit = st.button('Enviar atualização!', type='primary')#, on_click=reset)
@@ -156,20 +156,22 @@ with container_data_editor:
             mudancas = pd.DataFrame(columns=['Nome da Forma de Abastecimento', 'Município', 'Antes', 'Depois'])
             # Verifica se o botão de envio foi clicado
             if submit:
+                dados_antigos = dados.copy()
                 dados.reset_index(drop=True, inplace=True)
-                edited_df.reset_index(drop=True, inplace=True)
-                dados.set_index('Município', 'Nome da Forma de Abastecimento', inplace=True)
-                edited_df.set_index('Município', 'Nome da Forma de Abastecimento', inplace=True)
-                dados.update(edited_df)
+                dados_municipio.reset_index(drop=True, inplace=True)
+                dados.set_index('Código Forma de abastecimento', inplace=True)
+                dados_municipio.set_index('Código Forma de abastecimento', inplace=True)
+                dados.update(dados_municipio)
                 dados.reset_index(inplace=True)
-                for idx in dados_novos.index:
-                    if idx in dados.index and not dados.loc[idx].equals(dados_novos.loc[idx]):
+                data_to_send = dados.copy()
+                for idx in data_to_send.index:
+                    if idx in dados_antigos.index and not dados_antigos.loc[idx].equals(dados_novos.loc[idx]):
                         mudancas = mudancas.append({
                             'Nome da Forma de Abastecimento': idx[0],
                             'Município': idx[1],
-                            'Antes': dados.loc[idx].to_dict(),
-                            'Depois': edited_df.loc[idx].to_dict()}, ignore_index=True)
-                data_to_send = [dados.columns.tolist()] + dados.values.tolist()
+                            'Antes': dados_antigos.loc[idx].to_dict(),
+                            'Depois': data_to_send.loc[idx].to_dict()}, ignore_index=True)
+                #data_to_send = [dados.columns.tolist()] + dados.values.tolist()
                 # Atualizar a planilha
                 conn.update(worksheet='Tabela1', data=data_to_send)
                     
