@@ -57,7 +57,6 @@ with container_Sbox:
                 border: 2px solid white;
                 border-radius: 15px;
                 padding: 15px;
-                margin-left: 20px;
             }}
             </style>
             """,
@@ -73,6 +72,7 @@ with container_Sbox:
                 border-radius: 10px;
                 padding: 0px;
                 max-width: calc(100% - 25px);
+                margin-left: 25px;
             }}
             </style>
             <style>
@@ -82,6 +82,7 @@ with container_Sbox:
                 border-radius: 10px;
                 padding: 0px;
                 max-width: calc(100% - 25px);
+                margin-left: 25px;
             }}
             </style>
             <style>
@@ -91,6 +92,7 @@ with container_Sbox:
                 border-radius: 10px;
                 padding: 0px;
                 max-width: calc(100% - 25px);
+                margin-left: 25px;
             }}
             </style>
             """,
