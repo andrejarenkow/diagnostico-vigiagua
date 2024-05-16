@@ -32,7 +32,7 @@ conn = st.experimental_connection("gsheets", type=GSheetsConnection)
 # Lê os dados de um arquivo Excel online
 dados = conn.read(spreadsheet="https://docs.google.com/spreadsheets/d/1V6v6pqt21cR3yHkkraQJMYdutJg2PAM1T8nKpRxd-VE/edit?usp=sharing")
 
-ws = conn.get_worksheet('Tabela1')
+#ws = conn.get_worksheet('Tabela1')
 
 #CODIGO_PLANILHA = '1V6v6pqt21cR3yHkkraQJMYdutJg2PAM1T8nKpRxd-VE'
 #gc = gspread.service_account(filename='key.json')
@@ -182,7 +182,7 @@ with container_data_editor:
                 
                 # Atualizar a planilha
                 for update in lista_atualizacoes:
-                    conn.update(worksheet=ws, range=update['range'], values=update['values'])
+                    conn.update(worksheet='Tabela1', range=update['range'], values=update['values'])
                 try:
                     st.markdown(f'<h1 style="text-align: center;color:#FFFFFF;font-size:16px;">{"As linhas modificadas na tabela foram:"}</h1>', unsafe_allow_html=True)
                     df_mudancas = pd.DataFrame(mudancas)
