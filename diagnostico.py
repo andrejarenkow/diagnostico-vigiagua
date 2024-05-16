@@ -165,7 +165,7 @@ with container_data_editor:
                 dados.reset_index(inplace=True)
                 data_to_send = dados.copy()
                 for idx in data_to_send.index:
-                    if idx in dados_antigos.index and not dados_antigos.loc[idx].equals(dados_novos.loc[idx]):
+                    if idx in dados_antigos.index and not dados_antigos.loc[idx].equals(data_to_send.loc[idx]):
                         mudancas = mudancas.append({
                             'Nome da Forma de Abastecimento': idx[0],
                             'Município': idx[1],
