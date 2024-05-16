@@ -165,6 +165,7 @@ with container_data_editor:
                     df_mudancas = pd.DataFrame(lista_mudancas)
                 except Exception as x_error:
                     st.write(x_error)
+                #conn.update(data=dados)
                     
                 # Exibe uma mensagem de sucesso quando a atualização é enviada
                 st.success('Atualização enviada!', icon="✅")
