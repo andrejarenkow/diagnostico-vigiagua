@@ -158,10 +158,14 @@ with container_data_editor:
                 for index, row in dados[edited_df.columns].iterrows():
                     for index2, row2 in edited_df.iterrows():
                         if row == row2:
-                            dados.loc[[index]] = row2
-                            lista_mudancas.append(row2)
+                            dados.iloc[[index]] = row2
+                            lista_mudancas.append(dados.iloc[[index]])
 
-                df_mudancas = pd.DataFrame(lista_mudancas)
+                try:
+                    df_mudancas = pd.DataFrame(lista_mudancas)
+                except Exception as x_error:
+                    st.write(x_error)
+                    
                 # Exibe uma mensagem de sucesso quando a atualização é enviada
                 st.success('Atualização enviada!', icon="✅")
                 st.cache_data.clear()  # Limpa o cache de dados
