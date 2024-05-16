@@ -151,18 +151,28 @@ with container_data_editor:
             }}
             </style>
             ''', unsafe_allow_html=True)
+
+            sql = '''
+                    UPDATE tabela1
+                    SET [Sem informação] = ?, [Funcionando] = ?, [Parada/danificada] = ?
+                    WHERE `Nome da Forma de abastecimento` = ?;
+                    
+                   '''
             
             # Verifica se o botão de envio foi clicado
             if submit:
-                lista_mudancas  = []
-                for index, row in dados[edited_df.columns].iterrows():
-                    for index2, row2 in edited_df.iterrows():
-                        if row == row2:
-                            dados.iloc[[index]] = row2
-                            lista_mudancas.append(dados.iloc[[index]])
-
                 try:
-                    df_mudancas = pd.DataFrame(lista_mudancas)
+                    lista_mudancas  = []
+                    for index, row in dados[edited_df.columns].iterrows():
+                        for index2, row2 in edited_df.iterrows():
+                            if dados['Nome da Forma de Abastecimento'][index] == row2['Nome da Forma de Abastecimneto'] and dados['Município'][index] == municipio:
+                                conn.query(sql, (dados['Sem informação'][index], dados['Funcionando'][index], dados['Parada/danificada'][index], dados['Nome da Forma de Abastecimento'][index]))
+                                #conn.commit()
+                                lista_mudancas.append(dados.iloc[[index]])
+                except Exception as x1_error:
+                    st.write(x1_error)
+                try:
+                    df_mudancas = pd.DataFrame(data = lista_mudancas, columns=data_editor.columns)
                 except Exception as x_error:
                     st.write(x_error)
                 #conn.update(data=dados)
