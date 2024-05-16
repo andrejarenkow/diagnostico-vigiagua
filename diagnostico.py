@@ -138,10 +138,20 @@ with container_data_editor:
         with colcenter5:
             st.markdown(f'<h1 style="text-align: center;color:#FFFFFF;font-size:16px;">{"Marque o status de cada uma para informar seu status"}</h1>', unsafe_allow_html=True)  # Exibe uma mensagem para o usuário
             edited_df = st.data_editor(dados_municipio, use_container_width=True, hide_index=True)  # Exibe os dados do município para edição
-        
-            # Cria um botão para enviar a atualização e redefine o estado da sessão quando clicado
-            submit = st.button('Enviar atualização!', type='primary', on_click=reset)
 
+                
+
+            
+            # Cria um botão para enviar a atualização e redefine o estado da sessão quando clicado           
+            submit = st.button('Enviar atualização!', type='primary', on_click=reset)
+                lista_mudancas  = []
+                for index, row in dados[edited_df.columns].iterrows():
+                     for index2, row2 in edited_df.iterrows():
+                        if row == row2:
+                            dados.loc[index] = row2
+                            lista_mudancas.append(row2)
+
+            df_mudancas = pd.DataFrame(lista_mudancas)
             st.markdown(f'''
             <style>
             #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-1jicfl2.ea3mdgi5 > div > div > div > div:nth-child(5) > div > div > div > div.st-emotion-cache-keje6w.e1f1d6gn3 > div > div > div > div:nth-child(3) > div {{
@@ -151,14 +161,17 @@ with container_data_editor:
             }}
             </style>
             ''', unsafe_allow_html=True)
-        
+            
             # Verifica se o botão de envio foi clicado
             if submit:
+
+                
                 
                 # Exibe uma mensagem de sucesso quando a atualização é enviada
                 st.success('Atualização enviada!', icon="✅")
                 st.cache_data.clear()  # Limpa o cache de dados
-    
+                st.markdown(f'<h1 style="text-align: center;color:#FFFFFF;font-size:16px;">{"As linhas modificadas na tabela foram:"}</h1>', unsafe_allow_html=True)  # Exibe uma mensagem para o usuário
+                st.datafram(df_mudancas)
     except:
         # Se ocorrer uma exceção, exibe uma mensagem em branco
         st.write('')
