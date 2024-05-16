@@ -142,7 +142,7 @@ with container_data_editor:
             edited_df = st.data_editor(dados_municipio, use_container_width=True, hide_index=True)  # Exibe os dados do município para edição
             
             # Cria um botão para enviar a atualização e redefine o estado da sessão quando clicado           
-            submit = st.button('Enviar atualização!', type='primary', on_click=reset)
+            submit = st.button('Enviar atualização!', type='primary')#, on_click=reset)
             
             st.markdown(f'''
             <style>
@@ -159,7 +159,7 @@ with container_data_editor:
                 lista_atualizacoes = []
                 mudancas = []
                 for index, row in dados.iterrows():
-                    matching_rows = edited_df[
+                    matching_rows = dados[
                         (edited_df['Nome da Forma de Abastecimento'] == row['Nome da Forma de Abastecimento']) &
                         (municipio == row['Município'])
                     ]
@@ -191,10 +191,10 @@ with container_data_editor:
                 #conn.update(data=dados)
                     
                 # Exibe uma mensagem de sucesso quando a atualização é enviada
-                st.success(f'st.success(f"Atualização enviada! {len(lista_atualizacoes)} linhas foram atualizadas.")!', icon="✅")
+                st.success(f'Atualização enviada! {len(lista_atualizacoes)} linhas foram atualizadas.")!', icon="✅")
                 st.dataframe(df_mudancas)
                 st.cache_data.clear()  # Limpa o cache de dados
-                
+                reset()
                 # Exibe uma mensagem para o usuário
                 
     except Exception as erro_ultimo:
