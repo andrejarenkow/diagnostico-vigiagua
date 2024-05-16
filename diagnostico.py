@@ -158,7 +158,7 @@ with container_data_editor:
             if submit:
                 dados.set_index(['Nome da Forma de Abastecimento', 'Município'], inplace=True)
                 edited_df.set_index(['Nome da Forma de Abastecimento', 'Município'], inplace=True)
-                dados_novos.update(edited_df)
+                dados_novos = dados.update(edited_df)
 
                 for idx in dados_novos.index:
                     if idx in dados.index and not dados.loc[idx].equals(dados_novos.loc[idx]):
