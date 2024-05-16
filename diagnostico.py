@@ -20,7 +20,7 @@ def reset():
         # Itera sobre as chaves do estado da sessão e redefine seus valores para None
         st.session_state[key] = None
         
-container_titulo = st.container():        
+container_titulo = st.container()       
 with container_titulo:
     coluna_inicial1,coluna_inicial2,coluna_inicial3 = st.columns([1,8,1])
 
