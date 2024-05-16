@@ -54,7 +54,7 @@ with container_Sbox:
             <style>
             #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-1jicfl2.ea3mdgi5 > div > div > div > div.st-emotion-cache-ocqkz7.e1f1d6gn5 > div:nth-child(2) {{
                 box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.25);
-                border: 2px solid green;
+                border: 2px solid white;
                 border-radius: 15px;
                 padding: 10px;
             }}
@@ -68,7 +68,7 @@ with container_Sbox:
             <style>
             #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-1jicfl2.ea3mdgi5 > div > div > div > div.st-emotion-cache-ocqkz7.e1f1d6gn5 > div:nth-child(2) > div > div > div > div:nth-child(1) > div > div {{
                 background-color: #e0ffe0; /* Verde bem clarinho */
-                border: 1px solid lightgreen; /* Borda verde */
+                border: 1px solid white; /* Borda verde */
                 border-radius: 8px;
                 padding: 0px;
                 max-width: calc(100% - 25px);
@@ -80,7 +80,7 @@ with container_Sbox:
         st.markdown(
             f"""
             <style>
-            #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-1jicfl2.ea3mdgi5 > div > div > div > div.st-emotion-cache-ocqkz7.e1f1d6gn5 > div:nth-child(2) > div > div > div > div:nth-child(2) > div > label > div > p {{
+            #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-1jicfl2.ea3mdgi5 > div > div > div > div.st-emotion-cache-ocqkz7.e1f1d6gn5 > div:nth-child(2) > div > div > div > div:nth-child(2) > div > label {{
                 text-align: center;
                 margin: 0 auto; /* Centraliza horizontalmente */
                 display: table;
