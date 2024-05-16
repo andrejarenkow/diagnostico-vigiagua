@@ -153,43 +153,28 @@ with container_data_editor:
             }}
             </style>
             ''', unsafe_allow_html=True)
-            
+            mudancas = pd.DataFrame(columns=['Nome da Forma de Abastecimento', 'Município', 'Antes', 'Depois'])
             # Verifica se o botão de envio foi clicado
             if submit:
-                lista_atualizacoes = []
-                mudancas = []
-                for index, row in dados.iterrows():
-                    matching_rows = edited_df[edited_df['Nome da Forma de Abastecimento'] == row['Nome da Forma de Abastecimento']]
-                    for _, match in matching_rows.iterrows():
-                        # Armazenar dados antes da mudança
-                        old_values = row[['Sem informação', 'Funcionando', 'Parada/danificada']].tolist()
-                        new_values = [match['Sem informação'], match['Funcionando'], match['Parada/danificada']]
-                        
-                        # Verificar se realmente há uma mudança
-                        if old_values != new_values:
-                            lista_atualizacoes.append({
-                                'range': f'A{index+2}:D{index+2}',
-                                'values': [new_values]
-                            })
-                            mudancas.append({
-                                'Index': index,
-                                'Antes': old_values,
-                                'Depois': new_values
-                            })
+                dados.set_index(['Nome da Forma de Abastecimento', 'Município'], inplace=True)
+                edited_df.set_index(['Nome da Forma de Abastecimento', 'Município'], inplace=True)
+                dados_novos.update(edited_df)
+
+                for idx in dados_novos.index:
+                    if idx in dados.index and not dados.loc[idx].equals(dados_novos.loc[idx]):
+                        mudancas = mudancas.append({
+                            'Nome da Forma de Abastecimento': idx[0],
+                            'Município': idx[1],
+                            'Antes': dados.loc[idx].to_dict(),
+                            'Depois': edited_df.loc[idx].to_dict()}, ignore_index=True)
                 
                 # Atualizar a planilha
-                for update in lista_atualizacoes:
-                    conn.update(worksheet='Tabela1', range=update['range'], values=update['values'])
-                try:
-                    st.markdown(f'<h1 style="text-align: center;color:#FFFFFF;font-size:16px;">{"As linhas modificadas na tabela foram:"}</h1>', unsafe_allow_html=True)
-                    df_mudancas = pd.DataFrame(mudancas)
-                except Exception as x_error:
-                    st.write(x_error)
-                #conn.update(data=dados)
+                conn.update(worksheet='Tabela1', data=dados_novos)
                     
                 # Exibe uma mensagem de sucesso quando a atualização é enviada
                 st.success(f'Atualização enviada! {len(lista_atualizacoes)} linhas foram atualizadas.")!', icon="✅")
-                st.dataframe(df_mudancas)
+                
+                st.dataframe(mudancas)
                 st.cache_data.clear()  # Limpa o cache de dados
                 reset()
                 # Exibe uma mensagem para o usuário
