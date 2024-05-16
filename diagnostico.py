@@ -161,7 +161,7 @@ with container_data_editor:
                 for index, row in dados.iterrows():
                     matching_rows = edited_df[
                         (edited_df['Nome da Forma de Abastecimento'] == row['Nome da Forma de Abastecimento']) &
-                        (edited_df['Município'] == row['Município'])
+                        (municipio == row['Município'])
                     ]
                     for _, match in matching_rows.iterrows():
                         # Armazenar dados antes da mudança
