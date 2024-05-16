@@ -145,11 +145,11 @@ with container_data_editor:
             # Cria um botão para enviar a atualização e redefine o estado da sessão quando clicado           
             submit = st.button('Enviar atualização!', type='primary', on_click=reset)
             lista_mudancas  = []
-                for index, row in dados[edited_df.columns].iterrows():
-                     for index2, row2 in edited_df.iterrows():
-                        if row == row2:
-                            dados.loc[index] = row2
-                            lista_mudancas.append(row2)
+            for index, row in dados[edited_df.columns].iterrows():
+                for index2, row2 in edited_df.iterrows():
+                    if row == row2:
+                        dados.loc[index] = row2
+                        lista_mudancas.append(row2)
 
             df_mudancas = pd.DataFrame(lista_mudancas)
             st.markdown(f'''
@@ -164,8 +164,6 @@ with container_data_editor:
             
             # Verifica se o botão de envio foi clicado
             if submit:
-
-                
                 
                 # Exibe uma mensagem de sucesso quando a atualização é enviada
                 st.success('Atualização enviada!', icon="✅")
