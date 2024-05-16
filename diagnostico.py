@@ -154,9 +154,8 @@ with container_data_editor:
 
             sql = '''
                     UPDATE tabela1
-                    SET [Sem informação] = ?, [Funcionando] = ?, [Parada/danificada] = ?
-                    WHERE `Nome da Forma de abastecimento` = ?;
-                    
+                    SET [Sem informação] = ?, Funcionando = ?, [Parada/danificada] = ?
+                    WHERE `[Nome da Forma de abastecimento]` = ?;        
                    '''
             
             # Verifica se o botão de envio foi clicado
@@ -165,25 +164,30 @@ with container_data_editor:
                     lista_mudancas  = []
                     for index, row in dados[edited_df.columns].iterrows():
                         for index2, row2 in edited_df.iterrows():
-                            if dados['Nome da Forma de Abastecimento'][index] == row2['Nome da Forma de Abastecimneto'] and dados['Município'][index] == municipio:
-                                conn.query(sql, (dados['Sem informação'][index], dados['Funcionando'][index], dados['Parada/danificada'][index], dados['Nome da Forma de Abastecimento'][index]))
-                                st.write(dados['Sem informação'][index])
-                                #conn.commit()
+                            if dados['Nome da Forma de Abastecimento'][index] == edited_df['Nome da Forma de Abastecimneto'][index2] and dados['Município'][index] == municipio:
+                                
+                                st.write('Entrei no if')
+                                conn.query(sql, (edited_df['Sem informação'][index2], edited_df['Funcionando'][index2], edited_df['Parada/danificada'][index2], edited_df['Nome da Forma de Abastecimento'][index2]))
                                 lista_mudancas.append(dados.iloc[[index]])
+                                
+                    #conn.commit()
                 except Exception as x1_error:
                     st.write(x1_error)
                 try:
+                    st.markdown(f'<h1 style="text-align: center;color:#FFFFFF;font-size:16px;">{"As linhas modificadas na tabela foram:"}</h1>', unsafe_allow_html=True)
                     df_mudancas = pd.DataFrame(data = lista_mudancas, columns=edited_df.columns)
+                    df_mudancas = df_mudancas.set_index('Nome da Forma de Abastecimento')
                 except Exception as x_error:
                     st.write(x_error)
                 #conn.update(data=dados)
                     
                 # Exibe uma mensagem de sucesso quando a atualização é enviada
                 st.success('Atualização enviada!', icon="✅")
-                st.cache_data.clear()  # Limpa o cache de dados
-                st.markdown(f'<h1 style="text-align: center;color:#FFFFFF;font-size:16px;">{"As linhas modificadas na tabela foram:"}</h1>', unsafe_allow_html=True)
-                # Exibe uma mensagem para o usuário
                 st.dataframe(df_mudancas)
+                st.cache_data.clear()  # Limpa o cache de dados
+                
+                # Exibe uma mensagem para o usuário
+                
     except:
         # Se ocorrer uma exceção, exibe uma mensagem em branco
         st.write('')
