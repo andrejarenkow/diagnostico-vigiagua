@@ -128,7 +128,7 @@ with container_Sbox:
         )
 
         # Filtra os dados para exibir apenas as informações relevantes com base no município e tipo da forma de abastecimento selecionados
-        dados_municipio = dados[(dados['Município']==municipio)&(dados['Tipo da Forma de Abastecimento']==tipo_forma_abastecimento)][['Nome da Forma de Abastecimento','Sem informação', 'Funcionando', 'Parada/danificada']]
+        dados_municipio = dados[(dados['Município']==municipio)&(dados['Tipo da Forma de Abastecimento']==tipo_forma_abastecimento)][['Município','Nome da Forma de Abastecimento','Sem informação', 'Funcionando', 'Parada/danificada']]
         
 container_data_editor = st.container()
 with container_data_editor:
