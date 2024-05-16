@@ -167,12 +167,13 @@ with container_data_editor:
                         for index2, row2 in edited_df.iterrows():
                             if dados['Nome da Forma de Abastecimento'][index] == row2['Nome da Forma de Abastecimneto'] and dados['Município'][index] == municipio:
                                 conn.query(sql, (dados['Sem informação'][index], dados['Funcionando'][index], dados['Parada/danificada'][index], dados['Nome da Forma de Abastecimento'][index]))
+                                st.write(dados['Sem informação'][index])
                                 #conn.commit()
                                 lista_mudancas.append(dados.iloc[[index]])
                 except Exception as x1_error:
                     st.write(x1_error)
                 try:
-                    df_mudancas = pd.DataFrame(data = lista_mudancas, columns=data_editor.columns)
+                    df_mudancas = pd.DataFrame(data = lista_mudancas, columns=edited_df.columns)
                 except Exception as x_error:
                     st.write(x_error)
                 #conn.update(data=dados)
