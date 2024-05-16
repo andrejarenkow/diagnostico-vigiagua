@@ -144,7 +144,7 @@ with container_data_editor:
             
             # Cria um botão para enviar a atualização e redefine o estado da sessão quando clicado           
             submit = st.button('Enviar atualização!', type='primary', on_click=reset)
-                lista_mudancas  = []
+            lista_mudancas  = []
                 for index, row in dados[edited_df.columns].iterrows():
                      for index2, row2 in edited_df.iterrows():
                         if row == row2:
