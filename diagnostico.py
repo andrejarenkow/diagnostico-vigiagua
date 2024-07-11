@@ -106,7 +106,8 @@ c = (
     )
 )
 
-st_pyecharts(c.render_notebook())
+st_pyecharts(c)
+
 
 
 
