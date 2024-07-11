@@ -73,6 +73,7 @@ from pyecharts import options as opts
 from pyecharts.charts import Bar
 from pyecharts.commons.utils import JsCode
 from pyecharts.globals import ThemeType
+import streamlit as st
 
 list2 = [
     {"value": 12, "percent": 12 / (12 + 3)},
@@ -103,9 +104,10 @@ c = (
             ),
         )
     )
-    .render("stack_bar_percent.html")
+    .dump_options()
 )
 
 st_pyecharts(c)
+
 
 
