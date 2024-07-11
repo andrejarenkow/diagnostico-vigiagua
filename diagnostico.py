@@ -17,7 +17,7 @@ option = {
     },
     "xAxis": {
         "type": "category",
-        "data": ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+        "data": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
         "axisPointer": {
             "type": "shadow"
         }
