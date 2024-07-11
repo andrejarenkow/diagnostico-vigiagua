@@ -24,8 +24,8 @@ option = {
     },
     "yAxis": [
         {
-            "type": "Total de amostras",
-            "name": "水量",
+            "type": "value",
+            "name": "Total de amostras",
             "min": 0,
             "max": 250,
             "interval": 50,
