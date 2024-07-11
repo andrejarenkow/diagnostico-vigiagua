@@ -2,3 +2,4 @@ pandas
 streamlit
 pyecharts
 streamlit-echarts
+pyecharts
