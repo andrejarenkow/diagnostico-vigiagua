@@ -10,7 +10,7 @@ from streamlit_echarts import st_echarts
 
 # Exemplos: https://echarts.apache.org/examples/en/index.html
 
-st.markdown("""['Exemplos']('https://echarts.apache.org/examples/en/index.html')""")
+st.markdown("""[Exemplos](https://echarts.apache.org/examples/en/index.html)""")
 
 option = {
     "tooltip": {
