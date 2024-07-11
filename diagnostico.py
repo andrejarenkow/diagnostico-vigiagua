@@ -89,6 +89,6 @@ geo = (
     .render("geo_chart_countries_js.html")
 )
 
-
+st_pyecharts(geo)
 
 
