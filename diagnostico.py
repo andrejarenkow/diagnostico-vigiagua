@@ -75,10 +75,7 @@ svg_url = "https://echarts.apache.org/examples/data/asset/geo/Veins_Medical_Diag
 # Carregar o SVG
 svg_content = requests.get(svg_url).text
 
-# Registrar o mapa SVG
-register_script = f"""
-echarts.registerMap('organ_diagram', {{ svg: `{svg_content}` }});
-"""
+# Configurar as opções do gráfico
 option = {
     "tooltip": {},
     "geo": {
@@ -140,8 +137,14 @@ option = {
 
 # Renderizar o gráfico
 st_echarts(
-    options=option, height="400px",
-    scripts=[register_script]  # Incluir o script de registro do mapa SVG
+    options=option,
+    height="600px",
+    width="100%",
+    renderer="svg",
+    key="organ_diagram_chart",
+    map={
+        "organ_diagram": svg_content
+    }
 )
 
 
