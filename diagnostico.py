@@ -112,7 +112,7 @@ series = []
 for idx, day in enumerate(days):
     title.append({
         'textBaseline': 'middle',
-        #'top': ((idx + 0.5) * 100) / 7 + '%',
+        'top': ((idx + 0.5) * 100) / 7 ,
         'text': day
     })
     singleAxis.append({
@@ -120,8 +120,8 @@ for idx, day in enumerate(days):
         'type': 'category',
         'boundaryGap': False,
         'data': hours,
-        #'top': (idx * 100) / 7 + 5 + '%',
-        'height': 100 / 7 - 10 + '%',
+        'top': (idx * 100) / 7 + 5 ,
+        'height': 100 / 7 - 10 ,
         'axisLabel': {
             'interval': 2
         }
