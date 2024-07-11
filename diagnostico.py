@@ -80,7 +80,7 @@ def get_virtual_data(year):
     date_list = pd.date_range(
         start=f"{year}-01-01", end=f"{year + 1}-01-01", freq="D"
     )
-    return [[d.strftime("%Y-%m-%d"), random.randint(1, 10000)] for d in date_list]
+    return [[d.strftime("%Y-%m-%d"), 1] for d in date_list]
 
 option = {
     "tooltip": {"position": "top"},
