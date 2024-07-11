@@ -1,6 +1,8 @@
 import pandas as pd  # Importa a biblioteca pandas e a renomeia como pd
 import streamlit as st # Importa a biblioteca streamlit e a renomeia como st
 from streamlit_echarts import st_echarts
+import requests
+
 
 
 st.title('area de testes')
@@ -66,4 +68,80 @@ option = {
 st_echarts(
     options=option, height="400px",
 )
+
+# URL do SVG
+svg_url = "https://echarts.apache.org/examples/data/asset/geo/Veins_Medical_Diagram_clip_art.svg"
+
+# Carregar o SVG
+svg_content = requests.get(svg_url).text
+
+# Registrar o mapa SVG
+register_script = f"""
+echarts.registerMap('organ_diagram', {{ svg: `{svg_content}` }});
+"""
+option = {
+    "tooltip": {},
+    "geo": {
+        "left": 10,
+        "right": '50%',
+        "map": 'organ_diagram',
+        "selectedMode": 'multiple',
+        "emphasis": {
+            "focus": 'self',
+            "itemStyle": {
+                "color": None
+            },
+            "label": {
+                "position": 'bottom',
+                "distance": 0,
+                "textBorderColor": '#fff',
+                "textBorderWidth": 2
+            }
+        },
+        "blur": {},
+        "select": {
+            "itemStyle": {
+                "color": '#b50205'
+            },
+            "label": {
+                "show": False,
+                "textBorderColor": '#fff',
+                "textBorderWidth": 2
+            }
+        }
+    },
+    "grid": {
+        "left": '60%',
+        "top": '20%',
+        "bottom": '20%'
+    },
+    "xAxis": {},
+    "yAxis": {
+        "data": [
+            'heart',
+            'large-intestine',
+            'small-intestine',
+            'spleen',
+            'kidney',
+            'lung',
+            'liver'
+        ]
+    },
+    "series": [
+        {
+            "type": 'bar',
+            "emphasis": {
+                "focus": 'self'
+            },
+            "data": [121, 321, 141, 52, 198, 289, 139]
+        }
+    ]
+}
+
+# Renderizar o gráfico
+st_echarts(
+    options=option, height="400px",
+    scripts=[register_script]  # Incluir o script de registro do mapa SVG
+)
+
 
