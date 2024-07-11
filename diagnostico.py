@@ -69,82 +69,18 @@ st_echarts(
     options=option, height="400px",
 )
 
-# URL do SVG
-svg_url = "https://echarts.apache.org/examples/data/asset/geo/Veins_Medical_Diagram_clip_art.svg"
-
-# Carregar o SVG
-svg_content = requests.get(svg_url).text
-
-# Configurar as opções do gráfico
-option = {
-    "tooltip": {},
-    "geo": {
-        "left": 10,
-        "right": '50%',
-        "map": 'organ_diagram',
-        "selectedMode": 'multiple',
-        "emphasis": {
-            "focus": 'self',
-            "itemStyle": {
-                "color": None
-            },
-            "label": {
-                "position": 'bottom',
-                "distance": 0,
-                "textBorderColor": '#fff',
-                "textBorderWidth": 2
-            }
-        },
-        "blur": {},
-        "select": {
-            "itemStyle": {
-                "color": '#b50205'
-            },
-            "label": {
-                "show": False,
-                "textBorderColor": '#fff',
-                "textBorderWidth": 2
-            }
-        }
-    },
-    "grid": {
-        "left": '60%',
-        "top": '20%',
-        "bottom": '20%'
-    },
-    "xAxis": {},
-    "yAxis": {
-        "data": [
-            'heart',
-            'large-intestine',
-            'small-intestine',
-            'spleen',
-            'kidney',
-            'lung',
-            'liver'
-        ]
-    },
-    "series": [
+from streamlit_echarts import Map
+with open("USA.json", "r") as f:
+    map = Map(
+        "USA",
+        json.loads(f.read()),
         {
-            "type": 'bar',
-            "emphasis": {
-                "focus": 'self'
-            },
-            "data": [121, 321, 141, 52, 198, 289, 139]
-        }
-    ]
-}
-
-# Renderizar o gráfico
-st_echarts(
-    options=option,
-    height="600px",
-    width="100%",
-    renderer="svg",
-    key="organ_diagram_chart",
-    map={
-        "organ_diagram": svg_content
-    }
-)
+            "Alaska": {"left": -131, "top": 25, "width": 15},
+            "Hawaii": {"left": -110, "top": 28, "width": 5},
+            "Puerto Rico": {"left": -76, "top": 26, "width": 2},
+        },
+    )
+options = {...}
+st_echarts(options, map=map)
 
 
