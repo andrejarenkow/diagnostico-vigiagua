@@ -112,7 +112,7 @@ series = []
 for idx, day in enumerate(days):
     title.append({
         'textBaseline': 'middle',
-        'top': ((idx + 0.5) * 100) / 7 + '%',
+        #'top': ((idx + 0.5) * 100) / 7 + '%',
         'text': day
     })
     singleAxis.append({
