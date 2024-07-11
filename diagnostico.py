@@ -70,7 +70,7 @@ st_echarts(
 )
 ##########################################################
 
-with open("https://raw.githubusercontent.com/andfanilo/streamlit-echarts-demo/master/data/life-expectancy-table.json") as f:
+with open("life-expectancy-table.json") as f:
     raw_data = json.load(f)
 countries = [
     "Finland",
