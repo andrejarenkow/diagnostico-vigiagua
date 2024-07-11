@@ -77,52 +77,48 @@ import random
 
 # Função para gerar dados virtuais semelhante ao JavaScript
 def get_virtual_data(year):
-    date = time.mktime(time.strptime(year + '-01-01', '%Y-%m-%d'))
-    end = time.mktime(time.strptime(str(int(year) + 1) + '-01-01', '%Y-%m-%d'))
-    day_time = 3600 * 24 * 1000
-    data = []
-    while date < end:
-        data.append([
-            time.strftime('%Y-%m-%d', time.localtime(date)),
-            int(random.random() * 1000)
-        ])
-        date += day_time
-    return data
+    date_list = pd.date_range(
+        start=f"{year}-01-01", end=f"{year + 1}-01-01", freq="D"
+    )
+    return [[d.strftime("%Y-%m-%d"), randint(1, 10000)] for d in date_list]
 
-# Dados do gráfico
 option = {
-    "tooltip": {
-        "position": "top",
-        "formatter": "{b}: {c}"
-    },
+    "tooltip": {"position": "top"},
     "visualMap": {
         "min": 0,
-        "max": 1000,
+        "max": 10000,
         "calculable": True,
-        "orient": "vertical",
-        "left": "670",
-        "top": "center"
+        "orient": "horizontal",
+        "left": "center",
+        "top": "top",
     },
     "calendar": [
-        {"orient": "vertical", "range": "2015"},
-        {"left": 300, "orient": "vertical", "range": "2016"},
-        {
-            "left": 520,
-            "cellSize": [20, 'auto'],
-            "bottom": 10,
-            "orient": "vertical",
-            "range": "2017",
-            "dayLabel": {"margin": 5}
-        }
+        {"range": "2020", "cellSize": ["auto", 20]},
+        {"top": 260, "range": "2019", "cellSize": ["auto", 20]},
+        {"top": 450, "range": "2018", "cellSize": ["auto", 20], "right": 5},
     ],
     "series": [
-        {"type": "heatmap", "coordinateSystem": "calendar", "calendarIndex": 0, "data": get_virtual_data('2015')},
-        {"type": "heatmap", "coordinateSystem": "calendar", "calendarIndex": 1, "data": get_virtual_data('2016')},
-        {"type": "heatmap", "coordinateSystem": "calendar", "calendarIndex": 2, "data": get_virtual_data('2017')}
-    ]
+        {
+            "type": "heatmap",
+            "coordinateSystem": "calendar",
+            "calendarIndex": 0,
+            "data": get_virtual_data(2020),
+        },
+        {
+            "type": "heatmap",
+            "coordinateSystem": "calendar",
+            "calendarIndex": 1,
+            "data": get_virtual_data(2019),
+        },
+        {
+            "type": "heatmap",
+            "coordinateSystem": "calendar",
+            "calendarIndex": 2,
+            "data": get_virtual_data(2018),
+        },
+    ],
 }
-
-st_echarts(options=option, height="600px")
+st_echarts(option, height="640px", key="echarts")
 
 
 
