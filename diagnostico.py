@@ -70,84 +70,55 @@ st_echarts(
 )
 ##########################################################
 
+import streamlit as st
+import json
+import time
+import random
+
+# Função para gerar dados virtuais semelhante ao JavaScript
+def get_virtual_data(year):
+    date = time.mktime(time.strptime(year + '-01-01', '%Y-%m-%d'))
+    end = time.mktime(time.strptime(str(int(year) + 1) + '-01-01', '%Y-%m-%d'))
+    day_time = 3600 * 24 * 1000
+    data = []
+    while date < end:
+        data.append([
+            time.strftime('%Y-%m-%d', time.localtime(date)),
+            int(random.random() * 1000)
+        ])
+        date += day_time
+    return data
+
+# Dados do gráfico
 option = {
     "tooltip": {
-        "trigger": "axis",
-        "axisPointer": {
-            "type": "cross",
-            "crossStyle": {
-                "color": "#999"
-            }
-        }
+        "position": "top",
+        "formatter": "{b}: {c}"
     },
-    "toolbox": {
-        "feature": {
-            "dataView": {"show": True, "readOnly": False},
-            "magicType": {"show": True, "type": ["line", "bar"]},
-            "restore": {"show": True},
-            "saveAsImage": {"show": True}
-        }
+    "visualMap": {
+        "min": 0,
+        "max": 1000,
+        "calculable": True,
+        "orient": "vertical",
+        "left": "670",
+        "top": "center"
     },
-    "legend": {
-        "data": ['Evaporation', 'Precipitation', 'Temperature']
-    },
-    "xAxis": [
+    "calendar": [
+        {"orient": "vertical", "range": "2015"},
+        {"left": 300, "orient": "vertical", "range": "2016"},
         {
-            "type": "category",
-            "data": ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            "axisPointer": {
-                "type": "shadow"
-            }
-        }
-    ],
-    "yAxis": [
-        {
-            "type": "value",
-            "name": "Precipitation",
-            "min": 0,
-            "max": 250,
-            "interval": 50,
-            "axisLabel": {
-                "formatter": "{value} ml"
-            }
-        },
-        {
-            "type": "value",
-            "name": "Temperature",
-            "min": 0,
-            "max": 25,
-            "interval": 5,
-            "axisLabel": {
-                "formatter": "{value} °C"
-            }
+            "left": 520,
+            "cellSize": [20, 'auto'],
+            "bottom": 10,
+            "orient": "vertical",
+            "range": "2017",
+            "dayLabel": {"margin": 5}
         }
     ],
     "series": [
-        {
-            "name": "Evaporation",
-            "type": "bar",
-            "tooltip": {
-                "formatter": "{b}: {c} ml"
-            },
-            "data": [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6]
-        },
-        {
-            "name": "Precipitation",
-            "type": "bar",
-            "tooltip": {
-                "formatter": "{b}: {c} ml"
-            },
-            "data": [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6]
-        },
-        {
-            "name": "Temperature",
-            "type": "line",
-            "yAxisIndex": 1,
-            "tooltip": {
-                "formatter": "{b}: {c} °C"
-            },
-            "data": [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3]
-        }
+        {"type": "heatmap", "coordinateSystem": "calendar", "calendarIndex": 0, "data": get_virtual_data('2015')},
+        {"type": "heatmap", "coordinateSystem": "calendar", "calendarIndex": 1, "data": get_virtual_data('2016')},
+        {"type": "heatmap", "coordinateSystem": "calendar", "calendarIndex": 2, "data": get_virtual_data('2017')}
     ]
 }
 
