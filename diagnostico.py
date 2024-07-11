@@ -104,10 +104,10 @@ c = (
             ),
         )
     )
-    .dump_options()
 )
 
-st_pyecharts(c)
+st_pyecharts(c.render_notebook())
+
 
 
 
