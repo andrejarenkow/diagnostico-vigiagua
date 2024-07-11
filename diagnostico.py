@@ -120,7 +120,7 @@ for idx, day in enumerate(days):
         'type': 'category',
         'boundaryGap': False,
         'data': hours,
-        'top': (idx * 100) / 7 + 5 + '%',
+        #'top': (idx * 100) / 7 + 5 + '%',
         'height': 100 / 7 - 10 + '%',
         'axisLabel': {
             'interval': 2
