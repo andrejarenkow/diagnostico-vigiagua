@@ -70,6 +70,88 @@ st_echarts(
 )
 ##########################################################
 
+option = {
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "cross",
+            "crossStyle": {
+                "color": "#999"
+            }
+        }
+    },
+    "toolbox": {
+        "feature": {
+            "dataView": {"show": True, "readOnly": False},
+            "magicType": {"show": True, "type": ["line", "bar"]},
+            "restore": {"show": True},
+            "saveAsImage": {"show": True}
+        }
+    },
+    "legend": {
+        "data": ['Evaporation', 'Precipitation', 'Temperature']
+    },
+    "xAxis": [
+        {
+            "type": "category",
+            "data": ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            "axisPointer": {
+                "type": "shadow"
+            }
+        }
+    ],
+    "yAxis": [
+        {
+            "type": "value",
+            "name": "Precipitation",
+            "min": 0,
+            "max": 250,
+            "interval": 50,
+            "axisLabel": {
+                "formatter": "{value} ml"
+            }
+        },
+        {
+            "type": "value",
+            "name": "Temperature",
+            "min": 0,
+            "max": 25,
+            "interval": 5,
+            "axisLabel": {
+                "formatter": "{value} °C"
+            }
+        }
+    ],
+    "series": [
+        {
+            "name": "Evaporation",
+            "type": "bar",
+            "tooltip": {
+                "formatter": "{b}: {c} ml"
+            },
+            "data": [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6]
+        },
+        {
+            "name": "Precipitation",
+            "type": "bar",
+            "tooltip": {
+                "formatter": "{b}: {c} ml"
+            },
+            "data": [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6]
+        },
+        {
+            "name": "Temperature",
+            "type": "line",
+            "yAxisIndex": 1,
+            "tooltip": {
+                "formatter": "{b}: {c} °C"
+            },
+            "data": [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3]
+        }
+    ]
+}
+
+st_echarts(options=option, height="600px")
 
 
 
